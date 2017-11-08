@@ -5,9 +5,6 @@
 <html>
 <head>
       <title> Database Programming with PHP </title>
-      <p>
-        hello this is a test
-      </p>
       <meta charset = "utf-8" />
       <style type = "text/css">
       td, th, table {border: thin solid black;}
