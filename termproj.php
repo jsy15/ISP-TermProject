@@ -14,6 +14,7 @@
       </script>
 </head>
 <body>
+  <!-- I need to move these buttons to look better. Also style them in external css -->
 <button id="showtable" onclick="showtable()" style="display:none;">Show the Table</button>
 <button id="hidetable" onclick="hidetable()" style="display:block;">Hide the Table</button>
 <script>
@@ -95,54 +96,6 @@ if (!$er) {
     print "</table>";
     print "</div>";
 ?>
-
-    <form action = "http://pausch.cs.uakron.edu/~jsy15/php/db-starter1.php"
-          method = "post">
-      <h2> Playing with Database </h2>
-      <table>
-          <tr>
-            <th> Student ID </th>
-            <th> First Name </th>
-            <th> Last Name </th>
-            <th> Grade1 </th>
-            <th> Grade2 </th>
-            <th> Grade3 </th>
-            <th> Grade4 </th>
-            <th> Grade5 </th>
-          </tr>
-          <tr>
-            <td><input type = "text"  name = "uaid" size = "6" value = "0" /></td>
-            <td><input type = "text"  name = "fname" size = "16" value = "Test" /></td>
-            <td><input type = "text"  name = "lname" size = "16" value = "test" /></td>
-            <td><input type = "text"  name = "grade1" size = "2" value = "A" /></td>
-            <td><input type = "text"  name = "grade2" size = "2" value = "A" /></td>
-            <td><input type = "text"  name = "grade3" size = "2" value = "A" /></td>
-            <td><input type = "text"  name = "grade4" size = "2" value = "A" /></td>
-            <td><input type = "text"  name = "grade5" size = "2" value = "A" /></td>
-
-          </tr>
-      </table>
-      <p />
-<h3> Action </h3>
-      <p>
-        <input type = "radio"  name = "action"  value = "display" checked = "checked" />
-		Display all records <br />
-        <input type = "radio"  name = "action"  value = "insert" />
-		Add a new record <br />
-        <input type = "radio"  name = "action"  value = "update" />
-		Update an existing record <br />
-        <input type = "radio"  name = "action"  value = "delete" />
-		Delete an existing record <br />
-        <input type = "radio"  name = "action"  value = "user" />
-		Enter your own SQL statement below <br />
-        <input type = "text";  name = "statement" size = "40" value = "select * from term_project" id = "in" /> <br /><br />
-        <input type = "reset"  value = "Reset Form" />
-        <input type = "submit"  value = "Excute SQL" />
-<br />
-
- <button type="button" onclick="show()">Show SQL</button><br />
- <span id = "out" style="color:red"></span> <br /><br />
-
         </p>
     </form>
   </body>
