@@ -14,9 +14,24 @@
       </script>
 </head>
 <body>
+<button id="showtable" onclick="showtable()" style="display:none;">Show the Table</button>
+<button id="hidetable" onclick="hidetable()" style="display:block;">Hide the Table</button>
+<script>
+function showtable(){
+  document.getElementById('databaseshow').style.display = "block";
+  document.getElementById('hidetable').style.display = "inherit";
+  document.getElementById('showtable').style.display = "none";
+}
 
+function hidetable(){
+  document.getElementById('databaseshow').style.display = "none";
+  document.getElementById('hidetable').style.display = "none";
+  document.getElementById('showtable').style.display = "block";
+}
+</script>
 <?php
-$db = mysqli_connect("db1.cs.uakron.edu:3306", "jsy15", "ookuHoh1");
+print "<div id = \"databaseshow\" style=\"display:block;\">";
+$db = mysqli_connect("db1.cs.uakron.edu:3306", "jsy15", "termProjJacob17");
 if (!$db) {
      print "Error - Could not connect to MySQL";
      exit;
@@ -78,6 +93,7 @@ if (!$er) {
         $store = "";
     }
     print "</table>";
+    print "</div>";
 ?>
 
     <form action = "http://pausch.cs.uakron.edu/~jsy15/php/db-starter1.php"
@@ -93,11 +109,6 @@ if (!$er) {
             <th> Grade3 </th>
             <th> Grade4 </th>
             <th> Grade5 </th>
-            <th> Link1 </th>
-            <th> Link2 </th>
-            <th> Link3 </th>
-            <th> Link4 </th>
-            <th> Link5 </th>
           </tr>
           <tr>
             <td><input type = "text"  name = "uaid" size = "6" value = "0" /></td>
@@ -108,11 +119,6 @@ if (!$er) {
             <td><input type = "text"  name = "grade3" size = "2" value = "A" /></td>
             <td><input type = "text"  name = "grade4" size = "2" value = "A" /></td>
             <td><input type = "text"  name = "grade5" size = "2" value = "A" /></td>
-            <td><input type = "text"  name = "link1" size = "20" value = "http://www.google.com" /></td>
-            <td><input type = "text"  name = "link2" size = "20" value = "http://www.google.com" /></td>
-            <td><input type = "text"  name = "link3" size = "20" value = "http://www.google.com" /></td>
-            <td><input type = "text"  name = "link4" size = "20" value = "http://www.google.com" /></td>
-            <td><input type = "text"  name = "link5" size = "20" value = "http://www.google.com" /></td>
 
           </tr>
       </table>
