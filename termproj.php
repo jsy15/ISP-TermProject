@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<!-- db-starter.html
-     This html page along with db-starter.php demonstrates database programming with PHP
-     -->
+
 <html>
 <head>
-      <title> Database Programming with PHP </title>
+      <title> Database Grading </title>
       <meta charset = "utf-8" />
       <style type = "text/css">
-      td, th, table {border: thin solid black;}
+      td, th, table {border: thin solid black; border-collapse: collapse;}
           </style>
       <script>
           function show() {
@@ -19,7 +17,6 @@
 
 <?php
 $db = mysqli_connect("db1.cs.uakron.edu:3306", "jsy15", "ookuHoh1");
-//$db = mysqli_connect("db1.cs.uakron.edu:3306", "xiaotest", "wpdb","xiaotest");
 if (!$db) {
      print "Error - Could not connect to MySQL";
      exit;
@@ -41,7 +38,6 @@ if (!$er) {
     }
     $num_rows = "";
     $num_rows = mysqli_num_rows($result);
-    //print "Number of rows = $num_rows <br />";
 
     print "<table><caption> <h2> Grades ($num_rows) </h2> </caption>";
     print "<tr align = 'center'>";
@@ -53,6 +49,8 @@ if (!$er) {
     $keys = array_keys($row);
     for ($index = 0; $index < $num_fields; $index++)
         print "<th>" . $keys[2 * $index + 1] . "</th>";
+    for ($temp = 1; $temp <= 5; $temp++)
+      print"<th> Project $temp </th>";
     print "</tr>";
 
     $store = "";
@@ -68,17 +66,18 @@ if (!$er) {
               $store =  htmlspecialchars($values[1]);
             }
             print "<th>" . $value;
+
         }
+        print "<th><a href=\"http://pausch.cs.uakron.edu/~$store/pa1/pa1.html\" target=\"_blank\">Link 1</a> </th>";
+        print "<th><a href=\"http://pausch.cs.uakron.edu/~$store/pa2/pa2.html\" target=\"_blank\">Link 2</a> </th>";
+        print "<th><a href=\"http://pausch.cs.uakron.edu/~$store/pa3/pa3.php\" target=\"_blank\">Link 3</a> </th>";
+        print "<th><a href=\"http://pausch.cs.uakron.edu/~$store/pa4/pa4.html\" target=\"_blank\">Link 4</a> </th>";
+        print "<th><a href=\"http://pausch.cs.uakron.edu/~$store/pa5/pa1.html\" target=\"_blank\">Link 5</a> </th>";
         print "</tr>";
-        print "This is what I got: " . $store . "<br />";
-      //  print "<a href="http:\/\/pausch.cs.uakron.edu/~"" . $store . "jsy15/pa3/pa3.php"></a>";
-        //print ""
         $row = mysqli_fetch_array($result);
         $store = "";
     }
     print "</table>";
-
-    //print "This is what i got: " . $store;
 ?>
 
     <form action = "http://pausch.cs.uakron.edu/~jsy15/php/db-starter1.php"
