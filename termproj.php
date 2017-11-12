@@ -11,23 +11,34 @@
         }
       </script>
 </head>
+
 <body>
-  <!-- I need to move these buttons to look better. Also style them in external css -->
+<!--Input section-->
+<p>Add/Remove Students</p>
+<form id="add-students" method="POST" action="termproj.php">
+        <input type="text" name="fname">First Name<br>
+        <input type="text" name="lname">Last Name<br>
+        <input type="text" name="stud_id">Student ID<br>
+        <input type="submit" name="add_student" value="Add">
+        <input type="submit" name="remove_student" value="Remove">
+        <input type="reset" value="Reset">
+</form>
+<hr>
+<p>Update Grades</p>
+<form id="add-grades" method="POST" action="termproj.php">
+        <input type="text" name="stud_id_g">Student ID<br>
+        <input type="text" name="asgmt">Assignment (PA1, PA2, etc.)<br>
+        <input type="text" name="grade">Grade (ABCDF+-)<br>
+        <input type="submit" name="update_grade" value="Update">
+        <input type="reset" value="Reset">
+</form>
+<hr>
+
+<!-- I need to move these buttons to look better. Also style them in external css -->
 <button id="showtable" onclick="showtable()" style="display:none;">Show the Table</button>
 <button id="hidetable" onclick="hidetable()" style="display:block;">Hide the Table</button>
-<script>
-function showtable(){
-  document.getElementById('databaseshow').style.display = "block";
-  document.getElementById('hidetable').style.display = "inherit";
-  document.getElementById('showtable').style.display = "none";
-}
+<script src="script.js"></script>
 
-function hidetable(){
-  document.getElementById('databaseshow').style.display = "none";
-  document.getElementById('hidetable').style.display = "none";
-  document.getElementById('showtable').style.display = "block";
-}
-</script>
 <?php
 print "<div id = \"databaseshow\" style=\"display:block;\">";
 $db = mysqli_connect("db1.cs.uakron.edu:3306", "jsy15", "termProjJacob17");
@@ -93,6 +104,31 @@ if (!$er) {
     }
     print "</table>";
     print "</div>";
+
+    //Handle input, if any
+  if(!empty($_POST)) {
+    //Add student
+    if(isset($_POST["add_student"])) {
+      if(isset($_POST["fname"]) && isset($_POST["lname"]) && $_POST["stud_id"]){
+        //Insert the student's info into the database
+        print "insert";
+      }
+    }
+    //Remove student
+    elseif(isset($_POST["remove_student"])) {
+      if(isset($_POST["fname"]) && isset($_POST["lname"]) && $_POST["stud_id"]){
+        //Remove the student's info from the database
+        print "remove";
+      }
+    }
+    //Update grades
+    elseif(isset($_POST["update_grade"])) {
+      if(isset($_POST["stud_id_g"]) && isset($_POST["asgmt"]) && isset($_POST["grade"])) {
+        //Update the grade for the given assignment
+        print "update";
+      }
+    }
+  }
 ?>
         </p>
     </form>
