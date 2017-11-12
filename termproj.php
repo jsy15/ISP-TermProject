@@ -4,9 +4,7 @@
 <head>
       <title> Database Grading </title>
       <meta charset = "utf-8" />
-      <style type = "text/css">
-      td, th, table {border: thin solid black; border-collapse: collapse;}
-          </style>
+      <link rel="stylesheet" type="text/css" href="style.css">
       <script>
           function show() {
               document.getElementById("out").innerHTML = document.getElementById("in").value;
