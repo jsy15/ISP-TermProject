@@ -4,32 +4,49 @@
 <head>
       <title> Database Grading </title>
       <meta charset = "utf-8" />
-      <style type = "text/css">
-      td, th, table {border: thin solid black; border-collapse: collapse;}
-          </style>
+      <link rel="stylesheet" type="text/css" href="style.css">
       <script>
           function show() {
               document.getElementById("out").innerHTML = document.getElementById("in").value;
         }
       </script>
 </head>
+
 <body>
-  <!-- I need to move these buttons to look better. Also style them in external css -->
+<!--Input section-->
+<p>Add/Remove Students</p>
+<form id="add-students" method="POST" action="termproj.php">
+        <input type="text" name="fname">First Name<br>
+        <input type="text" name="lname">Last Name<br>
+        <input type="text" name="stud_id">Student ID<br>
+        <input type="submit" name="add_student" value="Add">
+        <input type="submit" name="remove_student" value="Remove">
+        <input type="reset" value="Reset">
+</form>
+<hr>
+<p>Update Grades</p>
+<form id="add-grades" method="POST" action="termproj.php">
+        <input type="text" name="stud_id_g">Student ID<br>
+        <select name= "asgmt" form="add-grades">
+          <option value="grade1">PA1</option>
+          <option value="grade2">PA2</option>
+          <option value="grade3">PA3</option>
+          <option value="grade4">PA4</option>
+          <option value="grade5">PA5</option>
+        </select>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        Assignment<br>
+        <input type="text" name="grade">Grade (ABCDF+-)<br>
+        <input type="submit" name="update_grade" value="Update">
+        <input type="reset" value="Reset">
+</form>
+<hr>
+
+<!-- I need to move these buttons to look better. Also style them in external css -->
 <button id="showtable" onclick="showtable()" style="display:none;">Show the Table</button>
 <button id="hidetable" onclick="hidetable()" style="display:block;">Hide the Table</button>
-<script>
-function showtable(){
-  document.getElementById('databaseshow').style.display = "block";
-  document.getElementById('hidetable').style.display = "inherit";
-  document.getElementById('showtable').style.display = "none";
-}
+<script src="script.js"></script>
 
-function hidetable(){
-  document.getElementById('databaseshow').style.display = "none";
-  document.getElementById('hidetable').style.display = "none";
-  document.getElementById('showtable').style.display = "block";
-}
-</script>
 <?php
 print "<div id = \"databaseshow\" style=\"display:block;\">";
 $db = mysqli_connect("db1.cs.uakron.edu:3306", "jsy15", "termProjJacob17");
@@ -95,6 +112,63 @@ if (!$er) {
     }
     print "</table>";
     print "</div>";
+
+    //Handle input, if any
+  if(!empty($_POST)) {
+    //Add student
+    if(isset($_POST["add_student"])) {
+      if(isset($_POST["fname"]) && isset($_POST["lname"]) && $_POST["stud_id"]){
+        
+        $stud_id = $_POST["stud_id"];
+        $fname = $_POST["fname"];
+        $lname = $_POST["lname"];
+
+        //Insert the student's info into the database
+        $query = "INSERT INTO term_project (stud_id, fname, lname, grade1, grade2, grade3, grade4, grade5)
+                            VALUES ('$stud_id', '$fname', '$lname', NULL, NULL, NULL, NULL, NULL);";
+        if(mysqli_query($db, $query)) {
+          print "<p> $fname's information was successfully inserted.</p>";
+        }
+        else {
+          print "<p>Error: " . mysqli_error($db) . "</p>";
+        }
+      }
+    }
+    //Remove student
+    elseif(isset($_POST["remove_student"])) {
+      if(isset($_POST["fname"]) && isset($_POST["lname"]) && $_POST["stud_id"]){
+        //Remove the student's info from the database
+        $stud_id = $_POST["stud_id"];
+
+        $query = "DELETE FROM term_project WHERE stud_id = '$stud_id';";
+        
+        if(mysqli_query($db, $query)) {
+          print "<p>Successfully removed $stud_id's record.</p>";
+        }
+        else {
+          print "<p>Error deleting record: " . mysqli_error($db) . "</p>";
+        }
+      }
+    }
+    //Update grades
+    elseif(isset($_POST["update_grade"])) {
+      if(isset($_POST["stud_id_g"]) && isset($_POST["asgmt"]) && isset($_POST["grade"])) {
+        //Update the grade for the given assignment
+        $stud_id_g = $_POST["stud_id_g"];
+        $asgmt = $_POST["asgmt"];
+        $grade = $_POST["grade"];
+
+        $query = "UPDATE term_project SET $asgmt='$grade' WHERE stud_id='$stud_id_g';";
+
+        if(mysqli_query($db, $query)) {
+          print "Grade for $stud_id_g updated successfully.";
+        }
+        else {
+          print "Error updating grade: " . mysqli_error($db);
+        }
+      }
+    }
+  }
 ?>
         </p>
     </form>
