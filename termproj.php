@@ -122,7 +122,7 @@ if (!$er) {
           print "<p> $fname's information was successfully inserted.</p>";
         }
         else {
-          echo "Error: " . mysqli_error($db);
+          echo "<p>Error: " . mysqli_error($db) . "</p>";
         }
       }
     }
@@ -130,7 +130,16 @@ if (!$er) {
     elseif(isset($_POST["remove_student"])) {
       if(isset($_POST["fname"]) && isset($_POST["lname"]) && $_POST["stud_id"]){
         //Remove the student's info from the database
-        print "remove";
+        $stud_id = $_POST["stud_id"];
+
+        $query = "DELETE FROM term_project WHERE stud_id = '$stud_id';";
+        
+        if(mysqli_query($db, $query)) {
+          echo "<p>Successfully removed $stud_id's record.</p>";
+        }
+        else {
+          echo "<p>Error deleting record: " . mysqli_error($db) . "</p>";
+        }
       }
     }
     //Update grades
