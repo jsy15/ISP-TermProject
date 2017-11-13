@@ -110,8 +110,20 @@ if (!$er) {
     //Add student
     if(isset($_POST["add_student"])) {
       if(isset($_POST["fname"]) && isset($_POST["lname"]) && $_POST["stud_id"]){
+        
+        $stud_id = $_POST["stud_id"];
+        $fname = $_POST["fname"];
+        $lname = $_POST["lname"];
+
         //Insert the student's info into the database
-        print "insert";
+        $query = "INSERT INTO term_project (stud_id, fname, lname, grade1, grade2, grade3, grade4, grade5)
+                            VALUES ('$stud_id', '$fname', '$lname', NULL, NULL, NULL, NULL, NULL);";
+        if(mysqli_query($db, $query)) {
+          print "<p> $fname's information was successfully inserted.</p>";
+        }
+        else {
+          echo "Error: " . mysqli_error($db);
+        }
       }
     }
     //Remove student
