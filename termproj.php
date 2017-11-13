@@ -27,7 +27,15 @@
 <p>Update Grades</p>
 <form id="add-grades" method="POST" action="termproj.php">
         <input type="text" name="stud_id_g">Student ID<br>
-        <input type="text" name="asgmt">Assignment (PA1, PA2, etc.)<br>
+        <select name= "asgmt" form="add-grades">
+          <option value="grade1">PA1</option>
+          <option value="grade2">PA2</option>
+          <option value="grade3">PA3</option>
+          <option value="grade4">PA4</option>
+          <option value="grade5">PA5</option>
+        </select>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        Assignment<br>
         <input type="text" name="grade">Grade (ABCDF+-)<br>
         <input type="submit" name="update_grade" value="Update">
         <input type="reset" value="Reset">
@@ -122,7 +130,7 @@ if (!$er) {
           print "<p> $fname's information was successfully inserted.</p>";
         }
         else {
-          echo "<p>Error: " . mysqli_error($db) . "</p>";
+          print "<p>Error: " . mysqli_error($db) . "</p>";
         }
       }
     }
@@ -135,10 +143,10 @@ if (!$er) {
         $query = "DELETE FROM term_project WHERE stud_id = '$stud_id';";
         
         if(mysqli_query($db, $query)) {
-          echo "<p>Successfully removed $stud_id's record.</p>";
+          print "<p>Successfully removed $stud_id's record.</p>";
         }
         else {
-          echo "<p>Error deleting record: " . mysqli_error($db) . "</p>";
+          print "<p>Error deleting record: " . mysqli_error($db) . "</p>";
         }
       }
     }
@@ -146,7 +154,18 @@ if (!$er) {
     elseif(isset($_POST["update_grade"])) {
       if(isset($_POST["stud_id_g"]) && isset($_POST["asgmt"]) && isset($_POST["grade"])) {
         //Update the grade for the given assignment
-        print "update";
+        $stud_id_g = $_POST["stud_id_g"];
+        $asgmt = $_POST["asgmt"];
+        $grade = $_POST["grade"];
+
+        $query = "UPDATE term_project SET $asgmt='$grade' WHERE stud_id='$stud_id_g';";
+
+        if(mysqli_query($db, $query)) {
+          print "Grade for $stud_id_g updated successfully.";
+        }
+        else {
+          print "Error updating grade: " . mysqli_error($db);
+        }
       }
     }
   }
