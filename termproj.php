@@ -1,54 +1,92 @@
 <!DOCTYPE html>
 
 <html>
+<div class="topbar" id="topbar">
+  <div class="topbarpanel">
+      Jacob Yelling
+  </div>
+  <div class="topmidpanel">
+    ISP Grade Assistance Website
+  </div>
+  <div class="topbarpanel">
+      Matthew Britton
+  </div>
+</div>
 <head>
       <title> Database Grading </title>
       <meta charset = "utf-8" />
       <link rel="stylesheet" type="text/css" href="style.css">
-      <script>
-          function show() {
-              document.getElementById("out").innerHTML = document.getElementById("in").value;
-        }
-      </script>
+
 </head>
 
 <body>
+  <br /><br /><br />
 <!--Input section-->
 <p>Add/Remove Students</p>
 <form id="add-students" method="POST" action="termproj.php">
-        <input type="text" name="fname">First Name<br>
-        <input type="text" name="lname">Last Name<br>
-        <input type="text" name="stud_id">Student ID<br>
-        <input type="submit" name="add_student" value="Add">
-        <input type="submit" name="remove_student" value="Remove">
-        <input type="reset" value="Reset">
+        <input class="inputColor" type="text" name="fname">First Name<br>
+        <input class="inputColor" type="text" name="lname">Last Name<br>
+        <input class="inputColor" type="text" name="stud_id">Student ID<br>
+        <input class="myButton" type="submit" name="add_student" value="Add">
+        <input class="myButton" type="submit" name="remove_student" value="Remove">
+        <input class="myButton" type="reset" value="Reset">
 </form>
-<hr>
+<hr class="blackHr">
 <p>Update Grades</p>
 <form id="add-grades" method="POST" action="termproj.php">
-        <input type="text" name="stud_id_g">Student ID<br>
-        <select name= "asgmt" form="add-grades">
-          <option value="grade1">PA1</option>
-          <option value="grade2">PA2</option>
-          <option value="grade3">PA3</option>
-          <option value="grade4">PA4</option>
-          <option value="grade5">PA5</option>
+        <input class="inputColor" type="text" name="stud_id_g">Student ID<br>
+        <select class="myButton" name= "asgmt" form="add-grades">
+          <option class="myButton" value="grade1">PA1</option>
+          <option class="myButton" value="grade2">PA2</option>
+          <option class="myButton" value="grade3">PA3</option>
+          <option class="myButton" value="grade4">PA4</option>
+          <option class="myButton" value="grade5">PA5</option>
         </select>
-        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
         Assignment<br>
-        <input type="text" name="grade">Grade (ABCDF+-)<br>
-        <input type="submit" name="update_grade" value="Update">
-        <input type="reset" value="Reset">
+        <input class="inputColor" type="text" name="grade">Grade (ABCDF+-)<br>
+        <input class="myButton" type="submit" name="update_grade" value="Update">
+        <input class="myButton" type="reset" value="Reset">
 </form>
-<hr>
+<hr class="blackHr"><br /><br />
+
+
 
 <!-- I need to move these buttons to look better. Also style them in external css -->
-<button id="showtable" onclick="showtable()" style="display:none;">Show the Table</button>
-<button id="hidetable" onclick="hidetable()" style="display:block;">Hide the Table</button>
+<button id="showtable" onclick="showtable()" style="display:none;" class="myButton">Show the Table</button>
+<button id="hidetable" onclick="hidetable()" style="display:block;" class="myButton">Hide the Table</button>
+<button id="tableupdate" onclick="popupNot()" class="myButton">Force Update Table</button>
+
+<div class="popup" style="position:absolute; top: 120px; left: 750px;"><span class="popuptext" id="myPopup">Table Updated</span></div>
 <script src="script.js"></script>
 
+<div id = "databaseshow" class="tableShow">
+</div>
+
+<!-- Can't move this into external file. Ajax call and defining. -->
+<script>
+function popupNot(){
+  displayTable();
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+  setTimeout(function(){popup.classList.toggle("show");},2000);
+
+}
+function displayTable(){
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    document.getElementById('databaseshow').innerHTML = this.responseText;
+  }
+  }
+  xmlhttp.open("GET","tabledisplay.php",true);
+  xmlhttp.send();
+}
+    displayTable();
+</script>
+
 <?php
-print "<div id = \"databaseshow\" style=\"display:block;\">";
+//print "<div id = \"databaseshow\" style=\"display:block;\">";
 $db = mysqli_connect("db1.cs.uakron.edu:3306", "jsy15", "termProjJacob17");
 if (!$db) {
      print "Error - Could not connect to MySQL";
@@ -61,6 +99,7 @@ if (!$er) {
     print "Error - Could not select the database";
     exit;
 }
+/*
   $query = "SELECT * FROM term_project";
   $result = mysqli_query($db,$query);
   if (!$result) {
@@ -111,14 +150,15 @@ if (!$er) {
         $store = "";
     }
     print "</table>";
-    print "</div>";
+//    print "</div>";
+*/
 
     //Handle input, if any
   if(!empty($_POST)) {
     //Add student
     if(isset($_POST["add_student"])) {
       if(isset($_POST["fname"]) && isset($_POST["lname"]) && $_POST["stud_id"]){
-        
+
         $stud_id = $_POST["stud_id"];
         $fname = $_POST["fname"];
         $lname = $_POST["lname"];
@@ -141,7 +181,7 @@ if (!$er) {
         $stud_id = $_POST["stud_id"];
 
         $query = "DELETE FROM term_project WHERE stud_id = '$stud_id';";
-        
+
         if(mysqli_query($db, $query)) {
           print "<p>Successfully removed $stud_id's record.</p>";
         }
@@ -171,6 +211,9 @@ if (!$er) {
   }
 ?>
         </p>
+        <div id="tableout">
+
+        </div>
     </form>
   </body>
 </html>

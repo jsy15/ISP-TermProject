@@ -1,5 +1,182 @@
-td, th, table {
-    border: thin solid black; 
-    border-collapse: collapse;
+table {
+  padding: 20px;
+  border: thin solid black;
+  border-collapse: collapse;
 }
 
+th,td {
+  padding: 8px;
+}
+
+th:nth-child(even){background-color: #d9d9d9; color:black;}
+
+th {
+  background-color: white;
+  color: black;
+}
+
+.labels {
+  background-color: #4CAF50 !important;
+  color: white !important;
+  border-bottom-style: dotted;
+  border-bottom-color: black;
+
+}
+
+.tableShow {
+  margin: auto;
+  width: 50%;
+  position: absolute;
+  top: 75px;
+  left: 500px;
+}
+
+.topbar {
+  border-style: inset;
+  border-color: black;
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  left: 0px;
+  display: flex;
+  text-align: center;
+  border-width: 1px;
+}
+
+.topbarpanel {
+  border-style: solid;
+  border-color: black;
+  width: 20%;
+  border-width: 1px;
+  line-height: 70px;
+}
+
+.topmidpanel {
+  border-style: solid;
+  border-color: black;
+  width: 60%;
+  border-width: 1px;
+  vertical-align: center !important;
+  line-height: 45px;
+  font-size: 200%;
+  color: white;
+  font-weight: bold;
+}
+
+body{
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#9dd53a+0,a1d54f+34,80c217+65,7cbc0a+66;Green+Gloss+%231 */
+background: #9dd53a; /* Old browsers */
+background: -moz-linear-gradient(45deg,  #9dd53a 0%, #a1d54f 34%, #80c217 65%, #7cbc0a 66%); /* FF3.6-15 */
+background: -webkit-linear-gradient(45deg,  #9dd53a 0%,#a1d54f 34%,#80c217 65%,#7cbc0a 66%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(45deg,  #9dd53a 0%,#a1d54f 34%,#80c217 65%,#7cbc0a 66%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dd53a', endColorstr='#7cbc0a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+margin: 0;
+}
+
+.blackHr {
+  border-color: green;
+  width: 20%;
+  position:absolute;
+  left: 0px;
+}
+
+.inputColor {
+  background: #9dd53a; /* Old browsers */
+  background: -moz-linear-gradient(45deg,  #9dd53a 0%, #a1d54f 34%, #80c217 65%, #7cbc0a 66%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg,  #9dd53a 0%,#a1d54f 34%,#80c217 65%,#7cbc0a 66%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg,  #9dd53a 0%,#a1d54f 34%,#80c217 65%,#7cbc0a 66%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dd53a', endColorstr='#7cbc0a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.myButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #9acc85;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #9acc85;
+	box-shadow:inset 0px 1px 0px 0px #9acc85;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #74ad5a), color-stop(1, #68a54b));
+	background:-moz-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
+	background:-webkit-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
+	background:-o-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
+	background:-ms-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
+	background:linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#74ad5a', endColorstr='#68a54b',GradientType=0);
+	background-color:#74ad5a;
+	border:1px solid #3b6e22;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	font-weight:bold;
+	padding:6px 12px;
+	text-decoration:none;
+}
+
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #68a54b), color-stop(1, #74ad5a));
+	background:-moz-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
+	background:-webkit-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
+	background:-o-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
+	background:-ms-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
+	background:linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#68a54b', endColorstr='#74ad5a',GradientType=0);
+	background-color:#68a54b;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
