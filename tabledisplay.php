@@ -34,6 +34,7 @@ if (!$er) {
         print "<th class=\"labels\">" . $keys[2 * $index + 1] . "</th>";
     for ($temp = 1; $temp <= 5; $temp++)
       print"<th class=\"labels\"> Project $temp </th>";
+      print"<th class=\"labels\"> Delete </th>";
     print "</tr>";
 
     $store = "";
@@ -61,6 +62,7 @@ if (!$er) {
         print "<th><a href=\"http://pausch.cs.uakron.edu/~$store/pa3/pa3.php\" target=\"_blank\">Link 3</a> </th>";
         print "<th><a href=\"http://pausch.cs.uakron.edu/~$store/pa4/pa4.html\" target=\"_blank\">Link 4</a> </th>";
         print "<th><a href=\"http://pausch.cs.uakron.edu/~$store/pa5/pa1.html\" target=\"_blank\">Link 5</a> </th>";
+        print "<th><form method=\"post\" action=\"updatetable.php\"><input type=\"text\" name=\"row\" style=\"display:none;\" value=\"" . $store . "\"\><input type=\"submit\" value=\"Delete\" /></form></th>";
         print "</tr>";
         $row = mysqli_fetch_array($result);
         $store = "";
